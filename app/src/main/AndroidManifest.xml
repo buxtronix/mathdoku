@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.cactii.mathdoku"
+    android:installLocation="auto"
+    android:versionCode="600"
+    android:versionName="Version 2.13" >
+
+    <!-- Cannot yet upgrade to target SDK-version 18 due to a bug in the archive. The grid view -->
+    <!-- in the archive won't be shown in case a chart is shown. -->
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:xlargeScreens="true" >
+    </supports-screens>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/application_name"
+        android:theme="@style/AppBaseTheme" >
+        <activity
+            android:name="net.cactii.mathdoku.ui.PuzzleFragmentActivity"
+            android:label="@string/application_name"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="net.cactii.mathdoku.ui.SharedPuzzleActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="mathdoku.net"
+                    android:pathPrefix="/puzzle"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="net.cactii.mathdoku.util.FileProvider"
+            android:authorities="net.cactii.mathdoku.util.FileProvider"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
+        <activity android:name="net.cactii.mathdoku.ui.PuzzlePreferenceActivity" />
+        <activity android:name="net.cactii.mathdoku.ui.ArchiveFragmentActivity" />
+        <activity android:name="net.cactii.mathdoku.ui.ArchivePreferenceActivity" />
+        <activity android:name="net.cactii.mathdoku.ui.StatisticsFragmentActivity" />
+        <activity android:name="net.cactii.mathdoku.ui.StatisticsPreferenceActivity" />
+    </application>
+
+</manifest>

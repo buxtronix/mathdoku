@@ -1,0 +1,304 @@
+<!-- Background of the top layout has been set to black to solve an issue with -->
+<!-- subtle color differences between the relative and the linear layouts. -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mathdoku="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/topLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000" >
+
+    <net.cactii.mathdoku.hint.TickerTape
+        android:id="@+id/tickerTape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="1dp"
+        android:textIsSelectable="false" />
+
+    <RelativeLayout android:id="@+id/puzzleGrid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tickerTape"
+        android:paddingTop="1dp"
+        android:visibility="gone" >
+
+        <!-- The margins of the next layout will be programmatically changed in such a way that the -->
+        <!-- inner area (i.e. everything except margins/padding) of the layout has the same width as -->
+        <!-- visible part of the grid player. -->
+        <!-- The layout will only be filled with the timer. But note that we put another layout on -->
+        <!-- top of this layout for displaying the input mode image and text. -->
+
+        <net.cactii.mathdoku.grid.ui.GridPlayerRelativeLayout
+            android:id="@+id/grid_player_relative_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/grid_player_view"
+            android:layout_alignRight="@+id/grid_player_view"
+            mathdoku:layout_alignGridPlayerViewLeft="visible_grid"
+            mathdoku:layout_alignGridPlayerViewRight="visible_grid" >
+
+            <!-- Be sure not to set the timerText to visibility="invisble" as this can result in -->
+            <!-- displaying the input mode image border on top of the swipe circle. -->
+
+            <TextView
+                android:id="@+id/timerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/input_mode_image"
+                android:layout_alignParentRight="true"
+                android:lines="1"
+                android:textSize="@dimen/text_size_default"
+                android:textStyle="bold" />
+        </net.cactii.mathdoku.grid.ui.GridPlayerRelativeLayout>
+
+        <net.cactii.mathdoku.grid.ui.GridPlayerView
+            android:id="@+id/grid_player_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/grid_player_relative_layout"
+            android:layout_alignParentRight="true" />
+
+        <!-- The input mode button and text are positioned on top of the grid_player_relative_layout. -->
+        <!-- However note that the height of this layout is not restricted to the height of the -->
+        <!-- grid_player_relative_layout. As a result, the content of this layout can be displayed -->
+        <!-- on top of the swipe circle and the gridplayerview as well. It however depends strongly -->
+        <!-- on Android's default text size whether this will happen. -->
+
+        <RelativeLayout android:id="@+id/input_mode_and_timer_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/grid_player_relative_layout"
+            android:layout_alignRight="@+id/grid_player_relative_layout"
+            android:layout_alignTop="@+id/grid_player_relative_layout" >
+
+            <ImageView
+                android:id="@+id/input_mode_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/input_mode_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/input_mode_image"
+                android:background="#000"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="@dimen/text_size_default"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/solvedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_ui_solved_messsage"
+            android:textSize="@dimen/text_size_giant"
+            android:visibility="gone" />
+
+        <LinearLayout android:id="@+id/digitButtons"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/grid_player_view"
+		    android:orientation="vertical"
+		    android:layout_marginLeft="40dp"
+		    android:layout_marginRight="40dp"
+		    android:layout_centerHorizontal="true"
+		    android:layout_centerInParent="true"
+		    android:layout_centerVertical="true" >
+
+		    <LinearLayout
+		        android:orientation="horizontal"
+		        android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content">
+		        <Button android:text="@string/main_ui_button1"
+		            android:id="@+id/digit1"
+		            style="@style/DigitButton"
+		            android:textSize="@dimen/controls_text_size_default"
+                	android:textStyle="bold"
+                	android:layout_weight="1"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	android:layout_margin="2dp"
+                	tools:ignore="ButtonStyle" />
+		        <Button android:text="@string/main_ui_button2"
+		            android:id="@+id/digit2"
+		            style="@style/DigitButton"
+		       		android:textSize="@dimen/controls_text_size_default"
+                	android:textStyle="bold"
+                	android:layout_weight="1"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	android:layout_margin="2dp"
+                	tools:ignore="ButtonStyle"     
+		            />
+
+		        <Button android:text="@string/main_ui_button3"
+		            android:id="@+id/digit3"
+		            style="@style/DigitButton"
+		          	android:textSize="@dimen/controls_text_size_default"
+                	android:textStyle="bold"
+                	android:layout_weight="1"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	android:layout_margin="2dp"
+                	tools:ignore="ButtonStyle"  
+		            />
+		        <ImageButton
+		            android:id="@+id/digitM"
+		            style="@style/DigitButton"
+		            android:layout_weight="1"
+		            android:layout_height="fill_parent"
+		            android:layout_width="match_parent"
+		            android:scaleType="fitCenter"
+                	android:src="@android:drawable/ic_menu_edit"
+		            android:layout_margin="2dp"
+					android:contentDescription="@string/main_ui_maybe"
+		            tools:ignore="ButtonStyle" />
+		    </LinearLayout>
+		    <LinearLayout 
+		        android:orientation="horizontal"
+		        android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content">
+		        <Button android:text="@string/main_ui_button4"
+		            android:id="@+id/digit4"
+		            style="@style/DigitButton"
+		            android:textSize="@dimen/controls_text_size_default"
+                	android:textStyle="bold"
+                	android:layout_weight="1"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	android:layout_margin="2dp"
+                	tools:ignore="ButtonStyle"
+		            />
+		        <Button android:text="@string/main_ui_button5"
+		            android:id="@+id/digit5"
+		            style="@style/DigitButton"
+		            android:textSize="@dimen/controls_text_size_default"
+                	android:textStyle="bold"
+                	android:layout_weight="1"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	android:layout_margin="2dp"
+                	tools:ignore="ButtonStyle"
+		            />
+
+		        <Button
+		            android:id="@+id/digit6"
+		            style="@style/DigitButton"
+		            android:layout_weight="1"
+		            android:text="@string/main_ui_button6"
+		            android:textSize="@dimen/controls_text_size_default"
+		            android:textStyle="bold"
+		            android:layout_margin="2dp"
+		            android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+		            tools:ignore="ButtonStyle" />
+		        <ImageButton
+		            android:layout_weight="1"
+		            style="@style/DigitButton"
+		            android:id="@+id/digitC"
+                	android:src="@android:drawable/ic_menu_delete"
+		            android:layout_margin="2dp"
+		            android:layout_height="fill_parent"
+		            android:layout_width="match_parent"
+		            android:scaleType="fitCenter"
+		            android:contentDescription="@string/main_ui_clear"
+		            tools:ignore="ButtonStyle" />
+		    </LinearLayout>
+		    <LinearLayout
+		        android:orientation="horizontal"
+		        android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content">
+		        <Button android:text="@string/main_ui_button7"
+		            android:id="@+id/digit7"
+		            style="@style/DigitButton"
+		            android:textSize="@dimen/controls_text_size_default"
+                	android:textStyle="bold"
+                	android:layout_weight="1"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	android:layout_margin="2dp"
+                	tools:ignore="ButtonStyle"
+		            />
+		        <Button android:text="@string/main_ui_button8"
+		            android:id="@+id/digit8"
+		            style="@style/DigitButton"
+		            android:textSize="@dimen/controls_text_size_default"
+                	android:textStyle="bold"
+                	android:layout_weight="1"
+                	android:layout_margin="2dp"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	tools:ignore="ButtonStyle"
+		            />
+		        <Button
+		            android:layout_weight="1"
+		            android:id="@+id/digit9"
+		            style="@style/DigitButton"
+		            android:text="@string/main_ui_button9"
+		            android:textSize="@dimen/controls_text_size_default"
+		            android:textStyle="bold"
+		            android:layout_margin="2dp"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            tools:ignore="ButtonStyle" />
+		        <ImageButton
+		            android:layout_weight="1"
+		            android:id="@+id/digitU"
+		            style="@style/DigitButton"
+                	android:src="@android:drawable/ic_menu_revert"
+		            android:layout_margin="2dp"
+		            android:layout_height="fill_parent"
+		            android:layout_width="match_parent"
+		            android:scaleType="fitCenter"
+		            android:contentDescription="@string/main_ui_undo"
+		            tools:ignore="ButtonStyle" />
+		    </LinearLayout>
+  		</LinearLayout>
+		
+        		
+        <LinearLayout android:id="@+id/clearUndo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/digitButtons"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp" >
+
+            <Button
+                android:id="@+id/clearButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:lines="1"
+                android:text="@string/main_ui_clear"
+                android:textSize="@dimen/controls_text_size_default"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/undoButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:lines="1"
+                android:text="@string/main_ui_undo"
+                android:textSize="@dimen/controls_text_size_default"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

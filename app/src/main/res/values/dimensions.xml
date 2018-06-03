@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default dimensions for layout. For tablets, see values-sw600dp. -->
+    <string name="dimension">default</string>
+
+    <!-- This file should NOT be translated or altered per language. -->
+    <!-- Values can and should be overwritten for specific screen sizes if necessary. -->
+
+
+    <!-- GENERAL - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+    <!-- The text size used for giant text (e.g. solved message). -->
+    <dimen name="text_size_giant">48sp</dimen>
+
+    <!-- The text size used for heading text. -->
+    <dimen name="text_size_heading">20sp</dimen>
+
+    <!-- The text size used for default text. -->
+    <dimen name="text_size_default">16sp</dimen>
+
+    <!-- CONTROLS AND SUB ELEMENTS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- The text size used for text on buttons. -->
+    <dimen name="controls_text_size_default">24sp</dimen>
+
+    <!-- DIALOGS  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+    <!-- The text size used for title text at level 1. -->
+    <dimen name="dialog_text_size_heading1">20sp</dimen>
+
+    <!-- The text size used for title text at level 2. -->
+    <dimen name="dialog_text_size_heading2">18sp</dimen>
+
+    <!-- The text size used for body text. -->
+    <dimen name="dialog_text_size_body">16sp</dimen>
+
+</resources>
