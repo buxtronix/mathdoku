@@ -75,6 +75,7 @@ public class ArchiveFragmentActivity extends AppFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.archive_activity_fragment);
 
+
 		// Create an adapter that when requested, will return a fragment
 		// representing an object in the collection.
 		// ViewPager and its adapters use support library fragments, so we must

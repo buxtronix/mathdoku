@@ -205,10 +205,15 @@ public class GridViewerView extends View {
 		// Get maximum width and height available to display the grid view.
 		int measuredWidth = measure(widthMeasureSpec);
 		int measuredHeight = measure(heightMeasureSpec);
+		int maxSize;
 
 		// Get the maximum space available for the grid. As it is a square we
 		// need the minimum of width and height.
-		int maxSize = Math.min(measuredWidth, measuredHeight);
+		if (measuredHeight == 0 || measuredWidth == 0) {
+			maxSize = Math.max(measuredWidth, measuredHeight);
+		} else {
+			maxSize = Math.min(measuredWidth, measuredHeight);
+		}
 		//maxSize = GetAvailableScreenSpace(maxSize);
 
 		// Compute the exact size needed to display a grid in which the

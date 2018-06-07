@@ -22,7 +22,7 @@ public class SolvingAttemptDatabaseAdapter extends DatabaseAdapter {
 
 	// Remove "&& false" in following line to show the SQL-statements in the
 	// debug information
-	public static final boolean DEBUG_SQL = (DevelopmentHelper.mMode == Mode.DEVELOPMENT) && false;
+	public static final boolean DEBUG_SQL = (DevelopmentHelper.mMode == Mode.DEVELOPMENT);
 
 	// Columns for table
 	protected static final String TABLE = "solving_attempt";

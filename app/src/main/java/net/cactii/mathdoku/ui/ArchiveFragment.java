@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -240,7 +241,9 @@ public class ArchiveFragment extends StatisticsBaseFragment implements
 	 * Creates all charts.
 	 */
 	private void createAllCharts() {
-		mChartsLayout.removeAllViewsInLayout();
+		if (mChartsLayout != null) {
+			mChartsLayout.removeAllViewsInLayout();
+		}
 
 		// Build all charts for current game only
 		createProgressChart();

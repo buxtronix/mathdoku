@@ -25,7 +25,7 @@ public class GridDatabaseAdapter extends DatabaseAdapter {
 
 	// Remove "&& false" in following line to show the SQL-statements in the
 	// debug information
-	public static final boolean DEBUG_SQL = (DevelopmentHelper.mMode == Mode.DEVELOPMENT) && false;
+	public static final boolean DEBUG_SQL = (DevelopmentHelper.mMode == Mode.DEVELOPMENT) && true;
 
 	// Columns for table statistics
 	protected static final String TABLE = "grid";
@@ -374,7 +374,7 @@ public class GridDatabaseAdapter extends DatabaseAdapter {
 		Cursor cursor = null;
 		try {
 			cursor = sqliteQueryBuilder.query(mSqliteDatabase,
-					projection.getAllColumnNames(), selection, null, KEY_ROWID,
+					projection.getAllColumnNames(), selection, null, null,
 					null, null);
 			if (cursor.moveToFirst()) {
 				gridIds = new int[cursor.getCount()][2];
