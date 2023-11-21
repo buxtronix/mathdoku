@@ -1,0 +1,29 @@
+Mathdoku App Privacy Policy
+
+For app: https://play.google.com/store/apps/details?id=net.cactii.mathdoku&hl=en_US
+Contact/developer: Ben Buxton (bbuxton@gmail.com)
+
+The app collects user data under the following circumstances only:
+
+- The user reports a problem via the "Report problem" functionality in the app.
+- (No data is collected without the user explicitly requesting this bug report).
+
+The following data is collected:
+
+- Name and email address, per the users gmail account.
+- Build information of the app
+- Hardware of the device the app is run on
+- A screenshot of the app when the report is generated.
+- The user has a full preview of the sent data prior to sending and can cancel before it is sent.
+
+The data us used as follows:
+
+- To diagnose issues reported by the user.
+- To communicate back with the user.
+
+Data storage and sharing policy:
+
+- Data is not forwarded to any third party.
+- Data may be archived for future reference only accessible to the developer.
+- Users may request deletion of data, upon receipt of this request the request will be honoured.
+
