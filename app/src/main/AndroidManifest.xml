@@ -22,15 +22,14 @@
         android:theme="@style/AppBaseTheme" >
         <activity
             android:name="net.cactii.mathdoku.ui.PuzzleFragmentActivity"
-            android:label="@string/application_name"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="net.cactii.mathdoku.ui.SharedPuzzleActivity" >
+        <activity android:name="net.cactii.mathdoku.ui.SharedPuzzleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
