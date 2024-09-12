@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="net.cactii.mathdoku"
     android:installLocation="auto"
     android:versionCode="600"
     android:versionName="Version 2.13" >
