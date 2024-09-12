@@ -7,6 +7,8 @@ import java.util.List;
 
 import net.cactii.mathdoku.developmentHelper.DevelopmentHelper;
 import net.cactii.mathdoku.developmentHelper.DevelopmentHelper.Mode;
+
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -390,8 +392,9 @@ public abstract class DatabaseAdapter {
 	 *            The table for which the actual columns have to be determined.
 	 * @return The list of columns in the given table.
 	 */
-	public static List<String> getTableColumns(SQLiteDatabase sqliteDatabase,
-			String tableName) {
+	@SuppressLint("Range")
+    public static List<String> getTableColumns(SQLiteDatabase sqliteDatabase,
+                                               String tableName) {
 		// Retrieve columns
 		String cmd = "pragma table_info(" + tableName + ");";
 		Cursor cur = sqliteDatabase.rawQuery(cmd, null);

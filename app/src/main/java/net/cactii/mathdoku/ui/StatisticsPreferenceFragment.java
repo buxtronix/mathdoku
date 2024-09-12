@@ -32,7 +32,7 @@ public class StatisticsPreferenceFragment extends PreferenceFragment implements
 	public void onStop() {
 		mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
 
-		super.onPause();
+		super.onStop();
 	}
 
 	@Override

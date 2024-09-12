@@ -5,9 +5,6 @@
     android:versionCode="600"
     android:versionName="Version 2.13" >
 
-    <!-- Cannot yet upgrade to target SDK-version 18 due to a bug in the archive. The grid view -->
-    <!-- in the archive won't be shown in case a chart is shown. -->
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"

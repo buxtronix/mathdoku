@@ -128,25 +128,9 @@ public class DevelopmentHelper {
 			AlertDialog.Builder builder = new AlertDialog.Builder(
 					puzzleFragmentActivity);
 			builder.setTitle("Delete database?")
-					.setMessage(
-							"The database will be deleted. All statistic "
-									+ "information will be lost permanently.")
-					.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog,
-										int id) {
-									// Do nothing
-								}
-							})
-					.setPositiveButton("Delete database",
-							new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog,
-										int id) {
-									executeDeleteDatabase(puzzleFragmentActivity);
-								}
-							});
+					.setMessage("The database will be deleted. All statistic information will be lost permanently.")
+					.setNegativeButton("Cancel", (dialog, id) -> { /* Do nothing */})
+					.setPositiveButton("Delete database", (dialog, id) -> executeDeleteDatabase(puzzleFragmentActivity));
 			AlertDialog dialog = builder.create();
 			dialog.show();
 		}
@@ -289,7 +273,7 @@ public class DevelopmentHelper {
 			Editor prefeditor = Preferences.getInstance().mSharedPreferences
 					.edit();
 			prefeditor.clear();
-			prefeditor.commit();
+			prefeditor.apply();
 		}
 	}
 
@@ -386,7 +370,7 @@ public class DevelopmentHelper {
 					.edit();
 			prefeditor.putBoolean(Preferences.ARCHIVE_AVAILABLE, true);
 			prefeditor.putBoolean(Preferences.STATISTICS_AVAILABLE, true);
-			prefeditor.commit();
+			prefeditor.apply();
 		}
 	}
 }

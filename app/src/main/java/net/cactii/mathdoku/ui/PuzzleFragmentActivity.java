@@ -645,7 +645,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 		}
 	}
 
-	/*
+	/**
 	 * Responds to a configuration change just before the activity is destroyed.
 	 * In case a background task is still running, a reference to this task will
 	 * be retained so that the activity can reconnect to this task as soon as it
