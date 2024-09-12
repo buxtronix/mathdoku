@@ -38,7 +38,7 @@ public class DevelopmentHelper {
 
 	public enum Mode {
 		DEVELOPMENT, BUG_SENSE, PRODUCTION
-	};
+	}
 
 	public static final Mode mMode = Mode.DEVELOPMENT;
 
@@ -54,6 +54,30 @@ public class DevelopmentHelper {
 	public static final String GRID_GENERATOR_PROGRESS_UPDATE_PROGRESS = "Update progress";
 	public static final String GRID_GENERATOR_PROGRESS_UPDATE_SOLUTION = "Found a solution";
 
+	private enum MenuId {
+		DELETE_DATABASE(R.id.development_mode_delete_database),
+		GENERATE_GAMES(R.id.development_mode_generate_games),
+		RESET_PREFERENCES(R.id.development_mode_reset_preferences),
+		UNLOCK_ARCHIVE(R.id.development_mode_unlock_archive),
+		CLEAR_DATA(R.id.development_mode_clear_data),
+		OTHER(0);
+
+		private final int value;
+
+		MenuId(int value) {
+			this.value = value;
+		}
+
+		public static MenuId fromId(int id){
+			for(MenuId e:MenuId.values()){
+				if(e.value == id){
+					return e;
+				}
+			}
+			return OTHER;
+		}
+	}
+
 	/**
 	 * Checks if given menu item id can be processed by the development helper.
 	 * 
@@ -67,25 +91,25 @@ public class DevelopmentHelper {
 	public static boolean onDevelopmentHelperOption(
 			PuzzleFragmentActivity puzzleFragmentActivity, int menuId) {
 		if (mMode == Mode.DEVELOPMENT) {
-			switch (menuId) {
-			case R.id.development_mode_delete_database:
-				executeDeleteDatabase(puzzleFragmentActivity);
-				break;
-			case R.id.development_mode_generate_games:
-				// Generate games
-				generateGames(puzzleFragmentActivity);
-				return true;
-			case R.id.development_mode_reset_preferences:
-				resetPreferences(puzzleFragmentActivity);
-				return true;
-			case R.id.development_mode_unlock_archive:
-				unlockArchiveAndStatistics();
-				return true;
-			case R.id.development_mode_clear_data:
-				deleteGamesAndPreferences(puzzleFragmentActivity);
-				return true;
-			default:
-				return false;
+			switch (MenuId.fromId(menuId)) {
+				case DELETE_DATABASE:
+					executeDeleteDatabase(puzzleFragmentActivity);
+					break;
+				case GENERATE_GAMES:
+					// Generate games
+					generateGames(puzzleFragmentActivity);
+					return true;
+				case RESET_PREFERENCES:
+					resetPreferences(puzzleFragmentActivity);
+					return true;
+				case UNLOCK_ARCHIVE:
+					unlockArchiveAndStatistics();
+					return true;
+				case CLEAR_DATA:
+					deleteGamesAndPreferences(puzzleFragmentActivity);
+					return true;
+				default:
+					return false;
 			}
 		}
 		return false;

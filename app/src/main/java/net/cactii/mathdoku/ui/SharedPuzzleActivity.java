@@ -108,15 +108,35 @@ public class SharedPuzzleActivity extends AppFragmentActivity {
 		return true;
 	}
 
+	private enum MenuId {
+		ACTION_SEND_FEEDBACK(R.id.action_send_feedback),
+		OTHER(0);
+
+		private final int value;
+
+		MenuId(int value) {
+			this.value = value;
+		}
+
+		public static MenuId fromId(int id){
+			for(MenuId e: MenuId.values()){
+				if(e.value == id){
+					return e;
+				}
+			}
+			return OTHER;
+		}
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		int menuId = menuItem.getItemId();
-		switch (menuId) {
-		case R.id.action_send_feedback:
-			new FeedbackEmail(this).show();
-			return true;
-		default:
-			return super.onOptionsItemSelected(menuItem);
+		switch (MenuId.fromId(menuId)) {
+			case ACTION_SEND_FEEDBACK:
+				new FeedbackEmail(this).show();
+				return true;
+			default:
+				return super.onOptionsItemSelected(menuItem);
 		}
 	}
 
