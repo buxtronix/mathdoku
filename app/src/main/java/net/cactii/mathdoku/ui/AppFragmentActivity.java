@@ -52,14 +52,22 @@ public class AppFragmentActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
-		if (key.equals(Preferences.PUZZLE_SETTING_FULL_SCREEN)) {
-			setFullScreenWindowFlag();
+	public void onSharedPreferenceChanged(
+			SharedPreferences sharedPreferences,
+			String key
+	) {
+		if (key == null){
+			return;
 		}
-		if (key.equals(Preferences.PUZZLE_SETTING_WAKE_LOCK)) {
-			setKeepScreenOnWindowFlag();
-		}
+		switch (key){
+			case Preferences.PUZZLE_SETTING_FULL_SCREEN:
+				setFullScreenWindowFlag();
+				return;
+			case Preferences.PUZZLE_SETTING_WAKE_LOCK:
+				setKeepScreenOnWindowFlag();
+				return;
+			default:
+        }
 	}
 
 	/**
