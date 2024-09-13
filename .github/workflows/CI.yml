@@ -30,4 +30,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: net.cactii.mathdoku-debug.apk
-          path: build/outputs/apk/debug/net.cactii.mathdoku-debug.apk
+          path: app/build/outputs/apk/debug/net.cactii.mathdoku-debug.apk
