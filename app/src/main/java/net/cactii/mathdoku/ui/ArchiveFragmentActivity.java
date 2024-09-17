@@ -206,42 +206,66 @@ public class ArchiveFragmentActivity extends AppFragmentActivity {
 		return true;
 	}
 
+	private enum MenuId {
+		HOME(android.R.id.home),
+		ACTION_SHARE(R.id.action_share),
+		ACTION_SETTINGS(R.id.action_settings),
+		ACTION_SEND_FEEDBACK(R.id.action_send_feedback),
+		ACTION_HELP(R.id.action_help),
+		OTHER(0);
+
+		private final int value;
+
+		MenuId(int value) {
+			this.value = value;
+		}
+
+		public static MenuId fromId(int id){
+			for(MenuId e: MenuId.values()){
+				if(e.value == id){
+					return e;
+				}
+			}
+			return OTHER;
+		}
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This is called when the Home (Up) button is pressed in the action
-			// bar. Create a simple intent that starts the hierarchical parent
-			// activity and use NavUtils in the Support Package to ensure proper
-			// handling of Up.
-			Intent upIntent = new Intent(this, PuzzleFragmentActivity.class);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				// This activity is not part of the application's task, so
-				// create a new task with a synthesized back stack.
-				// If there are ancestor activities, they should be added here.
-				TaskStackBuilder.create(this).addNextIntent(upIntent)
-						.startActivities();
-				finish();
-			} else {
-				// This activity is part of the application's task, so simply
-				// navigate up to the hierarchical parent activity.
-				NavUtils.navigateUpTo(this, upIntent);
-			}
-			return true;
-		case R.id.action_share:
-			new SharedPuzzle(this).addStatisticsChartsAsAttachments(
-					this.getWindow().getDecorView()).share(
-					getSolvingAttemptIdForCurrentSelectedGrid());
-			return true;
-		case R.id.action_settings:
-			startActivity(new Intent(this, ArchivePreferenceActivity.class));
-			return true;
-		case R.id.action_send_feedback:
-			new FeedbackEmail(this).show();
-			return true;
-		case R.id.action_help:
-			openHelpDialog();
-			return true;
+		switch (MenuId.fromId(item.getItemId())) {
+			case HOME:
+				// This is called when the Home (Up) button is pressed in the action
+				// bar. Create a simple intent that starts the hierarchical parent
+				// activity and use NavUtils in the Support Package to ensure proper
+				// handling of Up.
+				Intent upIntent = new Intent(this, PuzzleFragmentActivity.class);
+				if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+					// This activity is not part of the application's task, so
+					// create a new task with a synthesized back stack.
+					// If there are ancestor activities, they should be added here.
+					TaskStackBuilder.create(this).addNextIntent(upIntent)
+							.startActivities();
+					finish();
+				} else {
+					// This activity is part of the application's task, so simply
+					// navigate up to the hierarchical parent activity.
+					NavUtils.navigateUpTo(this, upIntent);
+				}
+				return true;
+			case ACTION_SHARE:
+				new SharedPuzzle(this).addStatisticsChartsAsAttachments(
+						this.getWindow().getDecorView()).share(
+						getSolvingAttemptIdForCurrentSelectedGrid());
+				return true;
+			case ACTION_SETTINGS:
+				startActivity(new Intent(this, ArchivePreferenceActivity.class));
+				return true;
+			case ACTION_SEND_FEEDBACK:
+				new FeedbackEmail(this).show();
+				return true;
+			case ACTION_HELP:
+				openHelpDialog();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

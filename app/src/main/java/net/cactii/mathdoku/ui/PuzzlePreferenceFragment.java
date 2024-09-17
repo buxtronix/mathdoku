@@ -58,7 +58,7 @@ public class PuzzlePreferenceFragment extends PreferenceFragment implements
 		mPreferences.mSharedPreferences
 				.unregisterOnSharedPreferenceChangeListener(this);
 
-		super.onPause();
+		super.onStop();
 	}
 
 	@Override

@@ -44,7 +44,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -108,7 +107,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);	
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.puzzle_activity_fragment);
 
 		// Check if database is consistent.
@@ -193,7 +192,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 		}
 		super.onResume();
 	}
-	
+
 	/*
 	 * Override back button to act as an undo button.
 	 */
@@ -314,6 +313,35 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 		return super.onPrepareOptionsMenu(menu);
 	}
 
+	private enum MenuId {
+		ACTION_NEW_GAME(R.id.action_new_game),
+		CHECK_PROGRESS(R.id.checkprogress),
+		ACTION_REVEAL_CELL(R.id.action_reveal_cell),
+		ACTION_REVEAL_OPERATOR(R.id.action_reveal_operator),
+		ACTION_SHOW_SOLUTION(R.id.action_show_solution),
+		ACTION_CLEAR_GRID(R.id.action_clear_grid),
+		ACTION_SHARE(R.id.action_share),
+		ACTION_PUZZLE_SETTINGS(R.id.action_puzzle_settings),
+		ACTION_SEND_FEEDBACK(R.id.action_send_feedback),
+		ACTION_PUZZLE_HELP(R.id.action_puzzle_help),
+		OTHER(0);
+
+		private final int value;
+
+		MenuId(int value) {
+			this.value = value;
+		}
+
+		public static MenuId fromId(int id){
+			for(MenuId e: MenuId.values()){
+				if(e.value == id){
+					return e;
+				}
+			}
+			return OTHER;
+		}
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		// First pass the event to ActionBarDrawerToggle, if it returns
@@ -324,88 +352,88 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 		}
 
 		int menuId = menuItem.getItemId();
-		switch (menuId) {
-		case R.id.action_new_game:
-			showDialogNewGame(true);
-			return true;
-		case R.id.checkprogress:
-			if (mPuzzleFragment != null) {
-				mPuzzleFragment.checkProgress();
-			}
-			return true;
-		case R.id.action_reveal_cell:
-			if (mPuzzleFragment != null) {
-				mPuzzleFragment.revealCell();
-			}
-			return true;
-		case R.id.action_reveal_operator:
-			if (mPuzzleFragment != null) {
-				mPuzzleFragment.revealOperator();
-			}
-			return true;
-		case R.id.action_show_solution:
-			if (mPuzzleFragment != null) {
-				mPuzzleFragment.revealSolution();
-			}
-			return true;
-		case R.id.action_clear_grid:
-			if (mPuzzleFragment != null) {
-				mPuzzleFragment.clearGrid();
-			}
-			return true;
-		case R.id.action_share:
-			if (mPuzzleFragment != null) {
-				new SharedPuzzle(this).share(mPuzzleFragment
-						.getSolvingAttemptId());
-			} else if (mArchiveFragment != null) {
-				// Only the archive fragment possibly contains the statistics
-				// views which can be enclosed as attachments to the share
-				// email.
-				new SharedPuzzle(this).addStatisticsChartsAsAttachments(
-						this.getWindow().getDecorView()).share(
-						mArchiveFragment.getSolvingAttemptId());
-			}
-			return true;
-		case R.id.action_puzzle_settings:
-			startActivity(new Intent(this, PuzzlePreferenceActivity.class));
-			return true;
-		case R.id.action_send_feedback:
-			new FeedbackEmail(this).show();
-			return true;
-		case R.id.action_puzzle_help:
-			this.openHelpDialog(false);
-			return true;
-		default:
-			// When running in development mode it should be checked whether a
-			// development menu item was selected.
-			if (DevelopmentHelper.mMode != Mode.DEVELOPMENT) {
-				return super.onOptionsItemSelected(menuItem);
-			} else {
+		switch (MenuId.fromId(menuId)) {
+			case ACTION_NEW_GAME:
+				showDialogNewGame(true);
+				return true;
+			case CHECK_PROGRESS:
 				if (mPuzzleFragment != null) {
-					// Cancel old timer
-					mPuzzleFragment.stopTimer();
+					mPuzzleFragment.checkProgress();
 				}
-
-				if (DevelopmentHelper.onDevelopmentHelperOption(this, menuId)) {
-					// A development helper menu option was processed
-					// succesfully.
-					if (mPuzzleFragment != null) {
-						mPuzzleFragment.startTimer();
-					}
-					return true;
+				return true;
+			case ACTION_REVEAL_CELL:
+				if (mPuzzleFragment != null) {
+					mPuzzleFragment.revealCell();
+				}
+				return true;
+			case ACTION_REVEAL_OPERATOR:
+				if (mPuzzleFragment != null) {
+					mPuzzleFragment.revealOperator();
+				}
+				return true;
+			case ACTION_SHOW_SOLUTION:
+				if (mPuzzleFragment != null) {
+					mPuzzleFragment.revealSolution();
+				}
+				return true;
+			case ACTION_CLEAR_GRID:
+				if (mPuzzleFragment != null) {
+					mPuzzleFragment.clearGrid();
+				}
+				return true;
+			case ACTION_SHARE:
+				if (mPuzzleFragment != null) {
+					new SharedPuzzle(this).share(mPuzzleFragment
+							.getSolvingAttemptId());
+				} else if (mArchiveFragment != null) {
+					// Only the archive fragment possibly contains the statistics
+					// views which can be enclosed as attachments to the share
+					// email.
+					new SharedPuzzle(this).addStatisticsChartsAsAttachments(
+							this.getWindow().getDecorView()).share(
+							mArchiveFragment.getSolvingAttemptId());
+				}
+				return true;
+			case ACTION_PUZZLE_SETTINGS:
+				startActivity(new Intent(this, PuzzlePreferenceActivity.class));
+				return true;
+			case ACTION_SEND_FEEDBACK:
+				new FeedbackEmail(this).show();
+				return true;
+			case ACTION_PUZZLE_HELP:
+				this.openHelpDialog(false);
+				return true;
+			default:
+				// When running in development mode it should be checked whether a
+				// development menu item was selected.
+				if (DevelopmentHelper.mMode != Mode.DEVELOPMENT) {
+					return super.onOptionsItemSelected(menuItem);
 				} else {
 					if (mPuzzleFragment != null) {
-						mPuzzleFragment.startTimer();
+						// Cancel old timer
+						mPuzzleFragment.stopTimer();
 					}
-					return super.onOptionsItemSelected(menuItem);
+
+					if (DevelopmentHelper.onDevelopmentHelperOption(this, menuId)) {
+						// A development helper menu option was processed
+						// succesfully.
+						if (mPuzzleFragment != null) {
+							mPuzzleFragment.startTimer();
+						}
+						return true;
+					} else {
+						if (mPuzzleFragment != null) {
+							mPuzzleFragment.startTimer();
+						}
+						return super.onOptionsItemSelected(menuItem);
+					}
 				}
-			}
 		}
 	}
 
 	/**
 	 * Starts a new game by building a new grid at the specified size.
-	 * 
+	 *
 	 * @param gridSize
 	 *            The grid size of the new puzzle.
 	 * @param hideOperators
@@ -437,7 +465,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 
 	/**
 	 * Displays the Help Dialog.
-	 * 
+	 *
 	 * @param displayLeadIn
 	 *            True to display the welcome message in the help.
 	 */
@@ -569,7 +597,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 
 	/**
 	 * Finishes the upgrading process after the game files have been converted.
-	 * 
+	 *
 	 * @param previousInstalledVersion
 	 *            Latest version of MathDoku which was actually used.
 	 * @param currentVersion
@@ -617,12 +645,12 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 		}
 	}
 
-	/*
+	/**
 	 * Responds to a configuration change just before the activity is destroyed.
 	 * In case a background task is still running, a reference to this task will
 	 * be retained so that the activity can reconnect to this task as soon as it
 	 * is resumed.
-	 * 
+	 *
 	 * @see android.app.Activity#onRetainNonConfigurationInstance()
 	 */
 	@Override
@@ -682,7 +710,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 			new TipArchiveAvailable(this).show();
 		}
 	}
-	
+
 	private void setActionBarVisibility(boolean force) {
 		// For small screens, when digit buttons are enabled, hide the action bar and
 		// force portrait.
@@ -786,7 +814,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 	/**
 	 * Shows the dialog in which the parameters have to specified which will be
 	 * used to create the new game.
-	 * 
+	 *
 	 * @param cancelable
 	 *            True in case the dialog can be cancelled.
 	 */
@@ -872,7 +900,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 			}
 		});
 		puzzleParameterRandomCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
@@ -998,7 +1026,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 
 	/**
 	 * The grid for the given solving attempt has to be replayed.
-	 * 
+	 *
 	 * @param solvingAttemptId
 	 *            The solving attempt for which the grid has to be replayed.
 	 * @return
@@ -1022,7 +1050,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 
 	/**
 	 * Reload the finished game currently displayed.
-	 * 
+	 *
 	 * @param view
 	 */
 	public void onClickReloadGame(View view) {
@@ -1056,11 +1084,11 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 	/**
 	 * Set the navigation drawer. The drawer can be open in following ways: -
 	 * tapping the drawer or the app icon - tapping the left side of the screen.
-	 * 
+	 *
 	 * The drawer icon will only be visible as soon as the archive or the
 	 * statistics are unlocked. From that moment it will be possible to open the
 	 * drawer by tapping the drawer or the app icon.
-	 * 
+	 *
 	 * It is not possible to disable the navigation drawer entirely in case the
 	 * archive and statistics are not yet unlocked. To prevent showing an empty
 	 * drawer, the puzzle activity itself will always be displayed as a
@@ -1116,7 +1144,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 
 			/*
 			 * (non-Javadoc)
-			 * 
+			 *
 			 * @see
 			 * android.support.v4.app.ActionBarDrawerToggle#onDrawerClosed(android
 			 * .view.View)
@@ -1133,7 +1161,7 @@ public class PuzzleFragmentActivity extends AppFragmentActivity implements
 
 			/*
 			 * (non-Javadoc)
-			 * 
+			 *
 			 * @see
 			 * android.support.v4.app.ActionBarDrawerToggle#onDrawerOpened(android
 			 * .view.View)

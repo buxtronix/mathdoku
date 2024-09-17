@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="net.cactii.mathdoku"
     android:installLocation="auto"
     android:versionCode="600"
     android:versionName="Version 2.13" >
-
-    <!-- Cannot yet upgrade to target SDK-version 18 due to a bug in the archive. The grid view -->
-    <!-- in the archive won't be shown in case a chart is shown. -->
 
     <supports-screens
         android:anyDensity="true"
@@ -23,15 +19,17 @@
         android:theme="@style/AppBaseTheme" >
         <activity
             android:name="net.cactii.mathdoku.ui.PuzzleFragmentActivity"
-            android:label="@string/application_name"
-            android:launchMode="singleTop" >
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="net.cactii.mathdoku.ui.SharedPuzzleActivity" >
+        <activity
+            android:name="net.cactii.mathdoku.ui.SharedPuzzleActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
