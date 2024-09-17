@@ -81,7 +81,7 @@
     <!-- The heading and body of the section refering to the list of changes. -->
     <!-- Note for translators: Changes are only available in English. Please mention this in this field. -->
     <string name="changelog_changes_title">Changes</string>
-    <string name="changelog_changes_body">- Swipe input can be disabled.\n- Better back button behaviour.\n- Crash and bug fixes.\n\nFor a full list of changes please go to our website using the link below.</string>
+    <string name="changelog_changes_body">- Update for Android SDK 35.\n\nFor a full list of changes please go to our website using the link below.</string>
 
     <!-- The heading and body of the section referring to the list of issues. -->
     <!-- Note for translators: Only issues written in English will be dealt with. Please mention this in field changelog_issues_body. -->
