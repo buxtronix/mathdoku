@@ -24,7 +24,7 @@ import android.util.Log;
 public class StatisticsDatabaseAdapter extends DatabaseAdapter {
 	private static final String TAG = "MathDoku.StatisticsDatabaseAdapter";
 
-	public static final boolean DEBUG_SQL = (DevelopmentHelper.mMode == Mode.DEVELOPMENT) && false;
+	public static final boolean DEBUG_SQL = (DevelopmentHelper.mMode == Mode.DEVELOPMENT);
 
 	// Columns for table statistics
 	private static final String TABLE = "statistics";
@@ -165,7 +165,7 @@ public class StatisticsDatabaseAdapter extends DatabaseAdapter {
 	 */
 	protected static void upgrade(SQLiteDatabase db, int oldVersion,
 			int newVersion) {
-		if (oldVersion < 438 && newVersion >= 438) {
+		if (oldVersion < 604 && newVersion >= 438) {
 			// In development and beta revisions the table is simply dropped and
 			// recreated.
 			try {

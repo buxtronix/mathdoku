@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:installLocation="auto"
-    android:versionCode="600"
-    android:versionName="Version 2.13" >
+    android:versionCode="604"
+    android:versionName="Version 2.14" >
 
     <supports-screens
         android:anyDensity="true"

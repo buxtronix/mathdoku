@@ -129,11 +129,15 @@ public class GridDatabaseAdapter extends DatabaseAdapter {
 	 */
 	protected static void upgrade(SQLiteDatabase db, int oldVersion,
 			int newVersion) {
-		if (oldVersion < 432 && newVersion >= 432) {
+		if (oldVersion < 604 && newVersion >= 432) {
 			// In development revisions the table is simply dropped and
 			// recreated.
 			try {
-				db.execSQL("DROP TABLE " + TABLE);
+				String sql = "DROP TABLE " + TABLE;
+				if (DEBUG_SQL) {
+					Log.i(TAG, sql);
+				}
+				db.execSQL(sql);
 			} catch (SQLiteException e) {
 				// Table does not exist
 			}

@@ -6,7 +6,7 @@ android {
     namespace = "net.cactii.mathdoku"
 
     val minAndroidVersion = 25
-    val androidVersion = 35
+    val androidVersion = 34
     val javaVersion = JavaVersion.VERSION_21
 
     compileSdk = androidVersion
@@ -17,16 +17,16 @@ android {
         applicationId = namespace
         minSdk = minAndroidVersion
         targetSdk = androidVersion
-        versionCode = 600
-        versionName = "2.13"
+        versionCode = 604
+        versionName = "2.14"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
         compileOptions.encoding = Charsets.UTF_8.name()
 
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildTypes {

@@ -122,7 +122,7 @@ public class SolvingAttemptDatabaseAdapter extends DatabaseAdapter {
 	 */
 	protected static void upgrade(SQLiteDatabase db, int oldVersion,
 			int newVersion) {
-		if (oldVersion < 433 && newVersion >= 433) {
+		if (oldVersion < 604 && newVersion >= 433) {
 			// In development revisions the table is simply dropped and
 			// recreated.
 			try {
